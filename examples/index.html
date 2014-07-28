@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Example for Dfd</title>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="../dist/dfd.js"></script>
+    <script>
+      window.onload = function() {
+
+        // dfd
+        dfd()
+
+        // error function
+        .fail(function(err) {
+          $('.error').show();
+        })
+
+        // wait
+        .wait(500)
+
+        // next function
+        .then(function(cb) {
+          $('#func1').show();
+          cb();
+        })
+
+        // wait
+        .wait(500)
+
+        // next function
+        .then(function(cb) {
+          $('#func2').show();
+          cb();
+        })
+
+        // wait
+        .wait(500)
+
+        // 
+        .then(function(cb) {
+          cb(new Error('exec error'));
+        })
+
+        // dfd start
+        .resolve();
+      };
+    </script>
+    <style type="text/css">
+    p { display: none; }
+    p.error { display: none; color: red; }
+    </style>
+  </head>
+  <body>
+    <h1>Example for Dfd</h1>
+    <p id="func1">func 1</p>
+    <p id="func2">func 2</p>
+    <p class="error">Error</p>
+  </body>
+</html>

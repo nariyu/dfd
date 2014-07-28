@@ -1,0 +1,21 @@
+{
+  "name": "dfd",
+  "version": "0.1.0",
+  "description": "a minimal deferred-like library.",
+  "authors": [
+    "nariyu <nariyu@gmail.com>"
+  ],
+  "main": "dist/dfd.js",
+  "keywords": [
+    "deferred"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/nariyu/dfd",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

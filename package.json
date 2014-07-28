@@ -1,0 +1,34 @@
+{
+  "name": "dfd",
+  "version": "0.1.0",
+  "description": "a minimal deferred-like library.",
+  "main": "dist/dfd.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:nariyu/dfd.git"
+  },
+  "keywords": [
+    "deffered",
+    "javascript"
+  ],
+  "author": "nariyu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nariyu/dfd/issues"
+  },
+  "homepage": "https://github.com/nariyu/dfd",
+  "devDependencies": {
+    "coffee-script": "^1.7.1",
+    "gulp": "^3.8.6",
+    "gulp-coffee": "^2.1.1",
+    "gulp-load-plugins": "^0.5.3",
+    "gulp-open": "^0.2.8",
+    "gulp-rename": "^1.2.0",
+    "gulp-rimraf": "^0.1.0",
+    "gulp-uglify": "^0.3.1",
+    "gulp-watch": "^0.6.8",
+    "gulp-webserver": "^0.4.0",
+    "run-sequence": "^0.3.6"
+  }
+}
