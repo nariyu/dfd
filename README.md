@@ -44,38 +44,32 @@ dfd()
   setTimeout(function() { location.reload(); }, 500);
 })
 
-// wait
-.wait(500)
-
 // next function
 .then(function(cb) {
-  $('#func1').show();
-  cb();
+  setTimeout(function() {
+    $('#func1').show();
+    cb();
+  }, Math.random() * 500);
 })
-
-// wait
-.wait(500)
 
 // 1/2 error
 .then(function(cb) {
-  if (Math.random() < .5) {
-    cb();
-  } else {
-    cb(new Error('exec error'));
-  }
+  setTimeout(function() {
+    if (Math.random() < .5) {
+      cb();
+    } else {
+      cb(new Error('exec error'));
+    }
+  }, Math.random() * 500);
 })
-
-// wait
-.wait(500)
 
 // next function
 .then(function(cb) {
-  $('#func2').show();
-  cb();
+  setTimeout(function() {
+    $('#func2').show();
+    cb();
+  }, Math.random() * 500);
 })
-
-// wait
-.wait(500)
 
 // parallel
 .then(
@@ -83,23 +77,22 @@ dfd()
     setTimeout(function() {
       $('#func3').show();
       cb();
-    }, Math.random() * 500);
+    }, Math.random() * 1000);
   },
   function(cb) {
     setTimeout(function() {
       $('#func4').show();
       cb();
-    }, Math.random() * 500);
+    }, Math.random() * 1000);
   }
 )
 
-// wait
-.wait(500)
-
 // next function
 .then(function(cb) {
-  $('#func5').show();
-  cb();
+  setTimeout(function() {
+    $('#func1').show();
+    cb();
+  }, Math.random() * 500);
 })
 
 // wait
