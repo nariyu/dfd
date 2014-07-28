@@ -37,6 +37,25 @@
         // wait
         .wait(500)
 
+        // parallel
+        .then(
+          function(cb) {
+            setTimeout(function() {
+              $('#func3').show();
+              cb();
+            }, Math.random() * 1000);
+          },
+          function(cb) {
+            setTimeout(function() {
+              $('#func4').show();
+              cb();
+            }, Math.random() * 1000);
+          }
+        )
+
+        // wait
+        .wait(500)
+
         // 
         .then(function(cb) {
           cb(new Error('exec error'));
@@ -55,6 +74,8 @@
     <h1>Example for Dfd</h1>
     <p id="func1">func 1</p>
     <p id="func2">func 2</p>
+    <p id="func3">func 3</p>
+    <p id="func4">func 4</p>
     <p class="error">Error</p>
   </body>
 </html>
