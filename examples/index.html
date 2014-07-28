@@ -13,7 +13,10 @@
 
         // error function
         .fail(function(err) {
+          console.error(err);
           $('.error').show();
+
+          setTimeout(function() { location.reload(); }, 500);
         })
 
         // wait
@@ -23,6 +26,18 @@
         .then(function(cb) {
           $('#func1').show();
           cb();
+        })
+
+        // wait
+        .wait(500)
+
+        // 1/2 error
+        .then(function(cb) {
+          if (Math.random() < .5) {
+            cb();
+          } else {
+            cb(new Error('exec error'));
+          }
         })
 
         // wait
@@ -43,22 +58,33 @@
             setTimeout(function() {
               $('#func3').show();
               cb();
-            }, Math.random() * 1000);
+            }, Math.random() * 500);
           },
           function(cb) {
             setTimeout(function() {
               $('#func4').show();
               cb();
-            }, Math.random() * 1000);
+            }, Math.random() * 500);
           }
         )
 
         // wait
         .wait(500)
 
-        // 
+        // next function
         .then(function(cb) {
-          cb(new Error('exec error'));
+          $('#func5').show();
+          cb();
+        })
+
+        // wait
+        .wait(500)
+
+        // next function
+        .then(function(cb) {
+          $('#end').show();
+
+          setTimeout(function() { location.reload(); }, 500);
         })
 
         // dfd start
@@ -76,6 +102,8 @@
     <p id="func2">func 2</p>
     <p id="func3">func 3</p>
     <p id="func4">func 4</p>
+    <p id="func5">func 5</p>
+    <p id="end">End</p>
     <p class="error">Error</p>
   </body>
 </html>
