@@ -33,19 +33,104 @@ HTML:
 JavaScript:
 
 ```
-var def = dfd();
+// dfd
+dfd()
 
-// ...
+// error function
+.fail(function(err) {
+  console.error(err);
+  $('.error').show();
+
+  setTimeout(function() { location.reload(); }, 500);
+})
+
+// wait
+.wait(500)
+
+// next function
+.then(function(cb) {
+  $('#func1').show();
+  cb();
+})
+
+// wait
+.wait(500)
+
+// 1/2 error
+.then(function(cb) {
+  if (Math.random() < .5) {
+    cb();
+  } else {
+    cb(new Error('exec error'));
+  }
+})
+
+// wait
+.wait(500)
+
+// next function
+.then(function(cb) {
+  $('#func2').show();
+  cb();
+})
+
+// wait
+.wait(500)
+
+// parallel
+.then(
+  function(cb) {
+    setTimeout(function() {
+      $('#func3').show();
+      cb();
+    }, Math.random() * 500);
+  },
+  function(cb) {
+    setTimeout(function() {
+      $('#func4').show();
+      cb();
+    }, Math.random() * 500);
+  }
+)
+
+// wait
+.wait(500)
+
+// next function
+.then(function(cb) {
+  $('#func5').show();
+  cb();
+})
+
+// wait
+.wait(500)
+
+// next function
+.then(function(cb) {
+  $('#end').show();
+
+  setTimeout(function() { location.reload(); }, 500);
+})
+
+// dfd start
+.resolve();
 ```
 
-### For Browserify
+### For Node.js or Browserify
 
 JavaScript:
 
 ```
 var dfd = require("dfd");
 
-// ...
+dfd()
+
+.then(function(cb) {
+  // CODE HERE
+  cb();
+})
+
+.resolve();
 ```
 
 ## License
