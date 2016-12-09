@@ -48,11 +48,8 @@ gulp.task 'open', ->
   Tasks
 ###
 
-# Default Task (None)
-gulp.task 'default', -> ''
-
-# Development
-gulp.task 'develop', ->
+# Default Task (Development)
+gulp.task 'default', ->
   runSequence 'clean', ['js', 'js-min'], 'watch', 'webserver', 'open'
 
 # Build

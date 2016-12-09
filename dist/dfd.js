@@ -11,8 +11,8 @@
     /*
       constructor
      */
-    function Dfd(scope) {
-      this.scope = scope != null ? scope : {};
+    function Dfd(scope1) {
+      this.scope = scope1 != null ? scope1 : {};
       this.__queuesStack = [];
       this.__always = null;
       this.__fail = null;
@@ -67,8 +67,8 @@
         queue = queues[i++];
         try {
           this.processes.push(queue.apply(this.scope, [done]));
-        } catch (_error) {
-          err = _error;
+        } catch (error) {
+          err = error;
           if (this.__always) {
             this.__always.apply(this.scope);
           }
@@ -124,7 +124,11 @@
      */
 
     Dfd.prototype.then = function() {
-      this.__queuesStack.push(Array.prototype.slice.apply(arguments));
+      if (typeof arguments[0] === 'function') {
+        this.__queuesStack.push(Array.prototype.slice.apply(arguments));
+      } else {
+        this.__queuesStack.push(arguments[0]);
+      }
       return this;
     };
 
@@ -162,11 +166,11 @@
      */
 
     Dfd.prototype.interrupt = function() {
-      var process, _i, _len, _ref;
+      var j, len, process, ref;
       if (this.processes) {
-        _ref = this.processes;
-        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-          process = _ref[_i];
+        ref = this.processes;
+        for (j = 0, len = ref.length; j < len; j++) {
+          process = ref[j];
           if (typeof process.abort === 'function') {
             process.abort();
           }

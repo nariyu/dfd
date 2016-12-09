@@ -95,7 +95,10 @@ class Dfd
     @param {Function} func
   ###
   then: ->
-    @__queuesStack.push(Array::slice.apply(arguments))
+    if typeof arguments[0] == 'function'
+      @__queuesStack.push(Array::slice.apply(arguments))
+    else
+      @__queuesStack.push(arguments[0])
     return @
 
 

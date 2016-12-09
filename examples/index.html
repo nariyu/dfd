@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8"/>
     <title>Example for Dfd</title>
-    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="../dist/dfd.js"></script>
     <script>
       window.onload = function() {
@@ -11,18 +10,28 @@
         // dfd
         dfd()
 
+        // always function
+        .always(function() {
+          trace('ALWAYS');
+        })
+
+        // done function
+        .done(function() {
+          trace('DONE');
+          setTimeout(function() { location.reload(); }, 500);
+        })
+
         // error function
         .fail(function(err) {
           console.error(err);
-          $('.error').show();
-
+          trace('error function');
           setTimeout(function() { location.reload(); }, 500);
         })
 
         // next function
         .then(function(cb) {
           setTimeout(function() {
-            $('#func1').show();
+            trace('func1');
             cb();
           }, Math.random() * 500);
         })
@@ -41,7 +50,7 @@
         // next function
         .then(function(cb) {
           setTimeout(function() {
-            $('#func2').show();
+            trace('func2');
             cb();
           }, Math.random() * 500);
         })
@@ -50,13 +59,13 @@
         .then(
           function(cb) {
             setTimeout(function() {
-              $('#func3').show();
+              trace('parallel func3-1');
               cb();
             }, Math.random() * 1000);
           },
           function(cb) {
             setTimeout(function() {
-              $('#func4').show();
+              trace('parallel func3-2');
               cb();
             }, Math.random() * 1000);
           }
@@ -65,38 +74,56 @@
         // next function
         .then(function(cb) {
           setTimeout(function() {
-            $('#func1').show();
+            trace('func4');
             cb();
           }, Math.random() * 500);
         })
+
+        // parallel
+        .then([
+          function(cb) {
+            setTimeout(function() {
+              trace('parallel func5-1');
+              cb();
+            }, Math.random() * 1000);
+          },
+          function(cb) {
+            setTimeout(function() {
+              trace('parallel func5-2');
+              cb();
+            }, Math.random() * 1000);
+          }
+        ])
 
         // wait
         .wait(500)
 
         // next function
         .then(function(cb) {
-          $('#end').show();
-
-          setTimeout(function() { location.reload(); }, 500);
+          trace('func6');
+          cb();
         })
 
         // dfd start
         .resolve();
       };
+
+      function trace(str) {
+        var elem = document.getElementById('result'),
+            html = elem.innerHTML;
+        if (html != '') html += '<br/>';
+        html += str.replace(/\n/g, '<br/>');
+        elem.innerHTML = html;
+      }
+      function clear() {
+        document.getElementById('result').innerHTML = '';
+      }
     </script>
     <style type="text/css">
-    p { display: none; }
-    p.error { display: none; color: red; }
     </style>
   </head>
   <body>
     <h1>Example for Dfd</h1>
-    <p id="func1">func 1</p>
-    <p id="func2">func 2</p>
-    <p id="func3">func 3</p>
-    <p id="func4">func 4</p>
-    <p id="func5">func 5</p>
-    <p id="end">End</p>
-    <p class="error">Error</p>
+    <p id="result"></p>
   </body>
 </html>
